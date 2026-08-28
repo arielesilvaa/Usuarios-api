@@ -17,10 +17,8 @@ public class UsuarioService {
     private final UsuarioConverter usuarioConverter;
 
     public UsuarioDTO salvaUsuario(UsuarioDTO usuarioDTO) {
-                Usuario usuario = usuarioConverter.paraUsuario(usuarioDTO);
-                 return usuarioConverter.paraUsuarioDTO( usuarioRepository.save(usuario));
+        Usuario usuario = usuarioConverter.paraUsuario(usuarioDTO);
+        return usuarioConverter.paraUsuarioDTO( usuarioRepository.save(usuario));
     }
-
-
 }
 
