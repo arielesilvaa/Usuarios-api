@@ -16,13 +16,14 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "rua")
+    @Column(name = "rua", length = 150)
     private String rua;
 
     @Column(name = "numero")
     private Long numero;
 
-    @Column(name = "complemento", length = 10)
+    // Aumentei o tamanho de complemento de 10 para 255
+    @Column(name = "complemento", length = 255)
     private String complemento;
 
     @Column(name = "cidade", length = 150)
