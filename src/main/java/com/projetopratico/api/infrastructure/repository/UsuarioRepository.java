@@ -1,6 +1,5 @@
 package com.projetopratico.api.infrastructure.repository;
 
-
 import com.projetopratico.api.infrastructure.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
