@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/usuario")
 @RequiredArgsConstructor
-
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -40,8 +39,9 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
     }
 
-    @DeleteMapping("/{email}")
-    public ResponseEntity<Void> deletaUsuarioPorEmail(@PathVariable String email){
+    // Agora usa query parameter para o email (evita problemas com '@' em path)
+    @DeleteMapping
+    public ResponseEntity<Void> deletaUsuarioPorEmail(@RequestParam("email") String email){
         usuarioService.deletaUsuarioPorEmail(email);
         return ResponseEntity.ok().build();
     }
