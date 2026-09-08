@@ -39,11 +39,16 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
     }
 
-    // Agora usa query parameter para o email (evita problemas com '@' em path)
     @DeleteMapping
     public ResponseEntity<Void> deletaUsuarioPorEmail(@RequestParam("email") String email){
         usuarioService.deletaUsuarioPorEmail(email);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<UsuarioDTO> atualizaDadosUsuario(@RequestHeader("Authorization") String token,
+                                                                                                    @RequestBody UsuarioDTO dto) {
+        return ResponseEntity.ok(usuarioService.atualizaDadosUsuario(token, dto));
     }
 
 }
