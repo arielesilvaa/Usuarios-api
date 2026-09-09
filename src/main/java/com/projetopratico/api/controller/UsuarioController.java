@@ -1,8 +1,9 @@
 package com.projetopratico.api.controller;
 
 import com.projetopratico.api.business.UsuarioService;
+import com.projetopratico.api.business.dto.EnderecoDTO;
+import com.projetopratico.api.business.dto.TelefoneDTO;
 import com.projetopratico.api.business.dto.UsuarioDTO;
-import com.projetopratico.api.infrastructure.entity.Usuario;
 import com.projetopratico.api.infrastructure.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<Usuario> buscaUsuarioPorEmail(@RequestParam("email") String email){
+    public ResponseEntity<UsuarioDTO> buscaUsuarioPorEmail(@RequestParam("email") String email){
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
     }
 
@@ -45,10 +46,25 @@ public class UsuarioController {
         return ResponseEntity.ok().build();
     }
 
+    // Atualiza dados do usuário (mantido em PUT /usuario)
     @PutMapping
     public ResponseEntity<UsuarioDTO> atualizaDadosUsuario(@RequestHeader("Authorization") String token,
-                                                                                                    @RequestBody UsuarioDTO dto) {
+                                                           @RequestBody UsuarioDTO dto) {
         return ResponseEntity.ok(usuarioService.atualizaDadosUsuario(token, dto));
+    }
+
+    // Atualiza endereço -> PUT /usuario/endereco?id=...
+    @PutMapping("/endereco")
+    public ResponseEntity<EnderecoDTO> atualizaEndereco(@RequestParam("id") Long id,
+                                                        @RequestBody EnderecoDTO dto) {
+        return ResponseEntity.ok(usuarioService.atualizaEndereco(id, dto));
+    }
+
+    // Atualiza telefone -> PUT /usuario/telefone?id=...
+    @PutMapping("/telefone")
+    public ResponseEntity<TelefoneDTO> atualizaTelefone(@RequestParam("id") Long id,
+                                                        @RequestBody TelefoneDTO dto) {
+        return ResponseEntity.ok(usuarioService.atualizaTelefone(id, dto));
     }
 
 }
