@@ -4,6 +4,7 @@ import com.projetopratico.api.business.UsuarioService;
 import com.projetopratico.api.business.dto.EnderecoDTO;
 import com.projetopratico.api.business.dto.TelefoneDTO;
 import com.projetopratico.api.business.dto.UsuarioDTO;
+import com.projetopratico.api.infrastructure.entity.Telefone;
 import com.projetopratico.api.infrastructure.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -66,5 +67,20 @@ public class UsuarioController {
                                                         @RequestBody TelefoneDTO dto) {
         return ResponseEntity.ok(usuarioService.atualizaTelefone(id, dto));
     }
+
+    @PostMapping("/endereco")
+    public ResponseEntity<EnderecoDTO> cadastraEndereco(@RequestBody EnderecoDTO dto,
+                                                        @RequestHeader  ("Authorization") String token){
+        return ResponseEntity.ok(usuarioService.cadastraEndereco(token, dto));
+    }
+
+    @PostMapping("/telefone")
+    public ResponseEntity<TelefoneDTO> cadastraTelefone(@RequestBody TelefoneDTO dto,
+                                                     @RequestHeader  ("Authorization") String token){
+        return ResponseEntity.ok(usuarioService.cadastraTelefone(token, dto));
+    }
+
+
+
 
 }
